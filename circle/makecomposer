@@ -1,0 +1,27 @@
+Listen 8080
+
+<VirtualHost *:8080>
+  DocumentRoot /home/ubuntu/makecomposer/build
+  ServerName makecomposer.dev
+
+  <Directory /home/ubuntu/makecomposer/build>
+    Options FollowSymLinks
+    AllowOverride All
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule /home/ubuntu/makecomposer/build/(.*)$ index.php/?q=$1 [L,QSA]
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  <FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+  </FilesMatch>
+</VirtualHost>
