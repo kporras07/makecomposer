@@ -1,24 +1,84 @@
 {
+  "name": "makecomposer",
+  "type": "project",
   "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+  {
+    "type": "composer",
+    "url": "https://packages.drupal.org/8"
+  }
+  ],
   "config": {
     "vendor-dir": ".vendor"
   },
   "require": {
-    "wikimedia/composer-merge-plugin": "dev-master"
-  },
-  "extra": {
-    "merge-plugin": {
-      "include": [
-        "composer.custom.json"
-      ],
-      "replace": false
-    }
+    "wikimedia/composer-merge-plugin": "dev-master",
+    "kporras07/composer-symlinks": "dev-master",
+    "composer/installers": "^1.2",
+    "drupal-composer/drupal-scaffold": "^2.2",
+    "cweagans/composer-patches": "~1.0"
   },
   "require-dev": {
     "testdrupal/behatextension": "dev-master",
-    "drush/drush": "8.1.0",
+    "drush/drush": "~8.0",
     "squizlabs/php_codesniffer": "2.5.1",
     "drupal/coder": "8.2.5",
     "behat/behat": "3.0.15"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "composer-scripts/composer/ScriptHandler.php"
+    ]
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion",
+      "DrupalProject\\composer\\ScriptHandler::cleanBuild"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion",
+      "DrupalProject\\composer\\ScriptHandler::cleanBuild"
+    ],
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+      "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+      "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks"
+    ]
+  },
+  "extra": {
+    "installer-paths": {
+      "build/core": ["type:drupal-core"],
+      "build/libraries/{$name}": ["type:drupal-library"],
+      "build/modules/contrib/{$name}": ["type:drupal-module"],
+      "build/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "build/themes/contrib/{$name}": ["type:drupal-theme"],
+      "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
+    "symlinks": {
+      "root/.htaccess": "build/.htaccess",
+      "root/.gitignore": "build/.gitignore",
+      "settings/settings.php": "build/sites/default/settings.php",
+      "settings/settings.local.php": "build/sites/default/settings.local.php",
+      "settings/settings.secret.php": "build/sites/default/settings.secret.php",
+      "settings/services.yml": "build/sites/default/services.yml",
+      "files": "build/sites/default/files",
+      "modules/custom": "build/modules/custom",
+      "themes/custom": "build/themes/custom",
+      "profiles": "build/profiles/custom"
+    },
+    "merge-plugin": {
+      "include": [
+        "composer.drupal.json"
+      ],
+      "replace": false
+    }
   }
 }
