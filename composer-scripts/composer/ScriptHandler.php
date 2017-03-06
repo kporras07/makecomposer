@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class ScriptHandler {
 
   protected static function getDrupalRoot($project_root) {
-    return $project_root . '/build';
+    return $project_root . '/web';
   }
 
   public static function cleanBuild() {
