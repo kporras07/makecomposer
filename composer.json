@@ -47,8 +47,7 @@
     ],
     "post-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-      "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks",
-      "DrupalProject\\composer\\ScriptHandler::updateAutoloadPath"
+      "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks"
     ]
   },
   "extra": {
