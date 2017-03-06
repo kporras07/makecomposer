@@ -70,6 +70,7 @@
       "settings/settings.secret.php": "build/sites/default/settings.secret.php",
       "settings/services.yml": "build/sites/default/services.yml",
       "files": "build/sites/default/files",
+      "config": "build/sites/default/config",
       "modules/custom": "build/modules/custom",
       "themes/custom": "build/themes/custom",
       "profiles": "build/profiles/custom"
