@@ -24,6 +24,6 @@ commands:
       git commit -m "$MESSAGE"
       git push origin $BRANCH
       cd ../
-      #rm -rf $CLONEFOLDER
+      rm -rf $CLONEFOLDER
       rm -rf web
       mv $BUILDFOLDER web
