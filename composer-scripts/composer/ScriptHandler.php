@@ -23,6 +23,19 @@ class ScriptHandler {
     $fs->remove($root);
   }
 
+  /**
+   * Update autoload path to use local vendor folder.
+   */
+  public static function updateAutoloadPath() {
+    if (!$event->isDevMode()) {
+      $root = static::getDrupalRoot(getcwd());
+      $file_path = $root . '/autoload.php';
+      $contents = file_get_contents($file_path);
+      $contents = str_replace('/../vendor/autoload.php', '/vendor/autoload.php', $contents);
+      file_put_contents($file_path, $contents);
+    }
+  }
+
   public static function createRequiredFiles(Event $event) {
     $fs = new Filesystem();
     $root = static::getDrupalRoot(getcwd());

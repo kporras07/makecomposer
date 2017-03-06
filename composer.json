@@ -9,9 +9,6 @@
     "url": "https://packages.drupal.org/8"
   }
   ],
-  "config": {
-    "vendor-dir": ".vendor"
-  },
   "require": {
     "wikimedia/composer-merge-plugin": "dev-master",
     "kporras07/composer-symlinks": "dev-master",
@@ -50,7 +47,8 @@
     ],
     "post-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-      "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks"
+      "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks",
+      "DrupalProject\\composer\\ScriptHandler::updateAutoloadPath"
     ]
   },
   "extra": {
@@ -74,7 +72,7 @@
       "modules/custom": "build/modules/custom",
       "themes/custom": "build/themes/custom",
       "profiles": "build/profiles/custom",
-      ".vendor": "build/.vendor"
+      "vendor": "build/vendor"
     },
     "merge-plugin": {
       "include": [
