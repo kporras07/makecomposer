@@ -26,7 +26,7 @@ class ScriptHandler {
   /**
    * Update autoload path to use local vendor folder.
    */
-  public static function updateAutoloadPath() {
+  public static function updateAutoloadPath(Event $event, Filesystem $filesystem = null) {
     if (!$event->isDevMode()) {
       $root = static::getDrupalRoot(getcwd());
       $file_path = $root . '/autoload.php';
