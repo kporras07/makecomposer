@@ -13,7 +13,7 @@ commands:
       cd $CLONEFOLDER
       git branch $BRANCH ; git checkout $BRANCH
       cd ../
-      composer install --no-dev
+      composer update --no-dev
       mv $CLONEFOLDER/.git build/
       rm -rf $CLONEFOLDER
       cd build
