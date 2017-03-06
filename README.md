@@ -7,6 +7,7 @@ makecomposer Drupal Distribution
 * VirtualBox: 5.x
 * Vagrant: 1.7.x
 * Ansible (optional, but recommended): 1.9.x
+* [Ahoy] (https://github.com/ahoy-cli/ahoy/releases) (2.0.0-beta1) (Only for Deploy)
 
 ### Mac
 

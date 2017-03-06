@@ -1,0 +1,34 @@
+ahoyapi: v2
+commands:
+  deploy:
+    usage: Deploy the site using ahoy
+    cmd: |
+      allargs=$(echo "{{args}}")
+      IFS=' '; read -ra parts <<< "$allargs"
+      BRANCH=''
+      MESSAGE=''
+      count=0
+      for i in "${parts[@]}"; do
+        count=$(($count + 1))
+        if [ $count -eq 1 ] then
+          BRANCH=$i
+        else
+          MESSAGE="$MESSAGE $i"
+        fi
+      done
+      REPO="ssh://codeserver.dev.ebb02d02-42d6-4004-968c-eb882396c721@codeserver.dev.ebb02d02-42d6-4004-968c-eb882396c721.drush.in:2222/~/repository.git"
+      BUILDFOLDER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1`
+      CLONEFOLDER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1`
+      mv build $BUILDFOLDER
+      git clone --branch $BRANCH $REPO $CLONEFOLDER || git clone $REPO $CLONEFOLDER
+      git branch $BRANCH ; git checkout $BRANCH
+      shopt -s extglob
+      composer install --no-dev
+      mv $CLONEFOLDER/.git build/
+      rm -rf $CLONEFOLDER
+      cd build
+      git add --all .
+      git commit -m "$MESSAGE"
+      git push origin $BRANCH
+      rm -rf build
+      mv $BUILDFOLDER build
