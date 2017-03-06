@@ -79,6 +79,12 @@
         "composer.drupal.json"
       ],
       "replace": false
+    },
+    "drupal-scaffold": {
+      "source": "https://raw.githubusercontent.com/pantheon-systems/drops-8/{version}/{path}",
+      "includes": [
+        "sites/default/settings.pantheon.php"
+      ]
     }
   }
 }
