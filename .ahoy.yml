@@ -25,5 +25,5 @@ commands:
       git push origin $BRANCH
       cd ../
       #rm -rf $CLONEFOLDER
-      #rm -rf web
+      rm -rf web
       mv $BUILDFOLDER web
