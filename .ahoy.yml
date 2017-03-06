@@ -23,9 +23,9 @@ commands:
       cd $CLONEFOLDER
       git add --all .
       git commit -m "$MESSAGE"
-      #git push origin $BRANCH
+      git push origin $BRANCH
       cd ../
-      #rm -rf $CLONEFOLDER
+      rm -rf $CLONEFOLDER
       rm -rf web
       mv $BUILDFOLDER web
       git checkout -- composer.lock
