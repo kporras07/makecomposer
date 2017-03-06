@@ -10,7 +10,9 @@ commands:
       CLONEFOLDER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1`
       mv build $BUILDFOLDER
       git clone --branch $BRANCH $REPO $CLONEFOLDER || git clone $REPO $CLONEFOLDER
+      cd $CLONEFOLDER
       git branch $BRANCH ; git checkout $BRANCH
+      cd ../
       shopt -s extglob
       composer install --no-dev
       mv $CLONEFOLDER/.git build/
