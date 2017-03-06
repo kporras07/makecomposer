@@ -16,8 +16,8 @@ html/index.html
 # Builds
 artifacts/*
 !artifacts/.gitkeep
-build/*
-!build/.gitkeep
+web/*
+!web/.gitkeep
 
 # Files
 files/*
