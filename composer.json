@@ -70,8 +70,7 @@
       "config": "build/sites/default/config",
       "modules/custom": "build/modules/custom",
       "themes/custom": "build/themes/custom",
-      "profiles": "build/profiles/custom",
-      "vendor": "build/vendor"
+      "profiles": "build/profiles/custom"
     },
     "merge-plugin": {
       "include": [
