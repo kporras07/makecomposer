@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "07c37f4ce0e4a4874ce4ba597f6e55f0",
-    "content-hash": "a5c2949bc16048c7a001e1bd12d9f973",
+    "hash": "eef9e58ce95a1747d87ef99df897e618",
+    "content-hash": "652db2f25be9633c660ed41f5050f45d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1220,12 +1220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kporras07/composer-symlinks.git",
-                "reference": "375a3bbbf64283918def71da7799255cef39af36"
+                "reference": "6f1014147782bbd4c622ff3ea96ee34ef321ab02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kporras07/composer-symlinks/zipball/375a3bbbf64283918def71da7799255cef39af36",
-                "reference": "375a3bbbf64283918def71da7799255cef39af36",
+                "url": "https://api.github.com/repos/kporras07/composer-symlinks/zipball/6f1014147782bbd4c622ff3ea96ee34ef321ab02",
+                "reference": "6f1014147782bbd4c622ff3ea96ee34ef321ab02",
                 "shasum": ""
             },
             "require": {
@@ -1267,7 +1267,7 @@
                 "script",
                 "symlink"
             ],
-            "time": "2017-03-06 15:31:04"
+            "time": "2017-03-06 16:04:03"
         },
         {
             "name": "masterminds/html5",
