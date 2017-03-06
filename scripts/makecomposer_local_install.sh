@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-if [ -f ./.vendor/bin/drush ] ; then mv ./.vendor ./vendor ; fi
 DRUSH="./vendor/bin/drush"
 SITE_ALIAS="@makecomposer.makecomposer.dev"
 SITE_UUID="e97d77ef-ada3-4889-a37c-e3b10b3ad919"
@@ -12,4 +11,3 @@ echo "Importing config..."
 if [ -f ./files/config/sync/core.extension.yml ] ; then $DRUSH $SITE_ALIAS cim -y ; fi
 echo "Cleaning cache..."
 $DRUSH $SITE_ALIAS cr
-mv ./vendor ./.vendor

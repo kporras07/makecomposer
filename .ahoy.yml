@@ -1,0 +1,34 @@
+ahoyapi: v2
+commands:
+  deploy:
+    usage: Deploy the site using ahoy
+    cmd: |
+      BRANCH=$1
+      MESSAGE=$2
+      REPO="ssh://codeserver.dev.ebb02d02-42d6-4004-968c-eb882396c721@codeserver.dev.ebb02d02-42d6-4004-968c-eb882396c721.drush.in:2222/~/repository.git"
+      BUILDFOLDER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1`
+      CLONEFOLDER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1`
+      mv web $BUILDFOLDER
+      git clone --branch $BRANCH $REPO $CLONEFOLDER || git clone $REPO $CLONEFOLDER
+      cd $CLONEFOLDER
+      git branch $BRANCH ; git checkout $BRANCH
+      shopt -s extglob
+      rm -rf ./!(.git|.|..)
+      cd ../
+      composer update --no-dev
+      if [ $? -ne 0 ] ; then composer update --no-dev ; fi
+      cp -r web $CLONEFOLDER/web
+      mv vendor $CLONEFOLDER/
+      cp pantheon.yml $CLONEFOLDER/
+      cd $CLONEFOLDER
+      git add --all .
+      git commit -m "$MESSAGE"
+      git push origin $BRANCH
+      cd ../
+      rm -rf $CLONEFOLDER
+      rm -rf web
+      mv $BUILDFOLDER web
+      git checkout -- composer.lock
+      composer update
+      if [ $? -ne 0 ] ; then composer update ; fi
+      git checkout -- composer.lock

@@ -5,13 +5,13 @@ build:
         name: Install Dependencies
         code: |
             npm install
-            composer install --prefer-source --no-interaction
     - script:
         name: Setup Global Stuff
         code: |
             cp ./wercker/makecomposer.aliases.drushrc.php ~/.drush
             # Drupal settings.
             cp ./wercker/wercker.settings.secret.php ./settings/settings.secret.php
+            composer update
             # Install xvfb.
             sudo apt-get install xvfb -y
             # Install Chrome.
@@ -43,7 +43,6 @@ build:
             # Prepare Drupal Installation and Install it.
             # Build the Drupal site and set files permissions.
             chown -R root:www-data ./files
-            ./node_modules/.bin/aquifer build
             chmod 777 -R ./build/sites/default/files
             chown -R www-data:www-data ./build/sites/default/files
             # Set alias.
@@ -114,11 +113,11 @@ deploy:
     - script:
         name: Deploy code to pantheon
         code: |
-            echo 'Load aquifer extensions...'
-            ./node_modules/.bin/aquifer extensions-load
             echo 'Ensure we are on git mode'
             terminus site set-connection-mode --site=makecomposer --env=dev --mode=git
-            ./node_modules/.bin/aquifer deploy-git -m "Auto deploy triggered from $WERCKER_GIT_BRANCH branch" || true
+            git config --global user.email "ci@estudiomanati.com"
+            git config --global user.name "CI Bot"
+            ahoy deploy master "Auto deploy triggered from master branch"
     - script:
         name: Deploy steps to pantheon dev
         code: |
@@ -244,7 +243,9 @@ deploy-multidev:
             if [ LENGTH > 10 ] ; then NEWBRANCH=${NEWBRANCH:8:6} ; fi
             NEWBRANCH=${NEWBRANCH//-/}
             NEWBRANCH=${NEWBRANCH,,}
-            aquifer deploy-git -m "Auto deploy triggered from $WERCKER_GIT_BRANCH branch" -b $NEWBRANCH || true
+            git config --global user.email "ci@estudiomanati.com"
+            git config --global user.name "CI Bot"
+            ahoy deploy $NEWBRANCH "Auto deploy triggered from $WERCKER_GIT_BRANCH branch"
     - script:
         name: Deploy steps to pantheon dev
         code: |
