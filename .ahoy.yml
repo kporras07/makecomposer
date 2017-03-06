@@ -16,7 +16,7 @@ commands:
       rm -rf ./!(.git|.|..)
       cd ../
       composer update --no-dev
-      if [ $? -ne 0 ] then composer update --no-dev ; fi
+      if [ $? -ne 0 ] ; then composer update --no-dev ; fi
       cp -r web $CLONEFOLDER/web
       mv vendor $CLONEFOLDER/
       cp pantheon.yml $CLONEFOLDER/
@@ -30,4 +30,5 @@ commands:
       mv $BUILDFOLDER web
       git checkout -- composer.lock
       composer update
+      if [ $? -ne 0 ] ; then composer update ; fi
       git checkout -- composer.lock
