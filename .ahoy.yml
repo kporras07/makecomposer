@@ -16,14 +16,14 @@ commands:
       rm -rf ./!(.git|.|..)
       cd ../
       composer update --no-dev
-      mv build $CLONEFOLDER/web
+      cp -r build $CLONEFOLDER/web
       mv vendor $CLONEFOLDER/
-      cp pantheon.yml $CLONEFOLDER
+      cp pantheon.yml $CLONEFOLDER/
       cd $CLONEFOLDER
       git add --all .
       git commit -m "$MESSAGE"
       git push origin $BRANCH
       cd ../
-      rm -rf $CLONEFOLDER
-      rm -rf build
+      #rm -rf $CLONEFOLDER
+      #rm -rf build
       mv $BUILDFOLDER build
