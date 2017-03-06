@@ -10,7 +10,8 @@ commands:
       count=0
       for i in "${parts[@]}"; do
         count=$(($count + 1))
-        if [ $count -eq 1 ] then
+        if [ $count -eq 1 ]
+        then
           BRANCH=$i
         else
           MESSAGE="$MESSAGE $i"
