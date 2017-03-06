@@ -13,7 +13,6 @@ commands:
       cd $CLONEFOLDER
       git branch $BRANCH ; git checkout $BRANCH
       cd ../
-      shopt -s extglob
       composer install --no-dev
       mv $CLONEFOLDER/.git build/
       rm -rf $CLONEFOLDER
@@ -21,5 +20,6 @@ commands:
       git add --all .
       git commit -m "$MESSAGE"
       git push origin $BRANCH
+      cd ../
       rm -rf build
       mv $BUILDFOLDER build
