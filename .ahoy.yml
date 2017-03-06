@@ -15,8 +15,8 @@ commands:
       shopt -s extglob
       rm -rf ./!(.git|.|..)
       cd ../
-      composer update
       composer update --no-dev
+      if [ $? -ne 0 ] then composer update --no-dev ; fi
       cp -r web $CLONEFOLDER/web
       mv vendor $CLONEFOLDER/
       cp pantheon.yml $CLONEFOLDER/
