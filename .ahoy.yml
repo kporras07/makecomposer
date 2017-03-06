@@ -30,3 +30,4 @@ commands:
       mv $BUILDFOLDER web
       git checkout -- composer.lock
       composer update
+      git checkout -- composer.lock
